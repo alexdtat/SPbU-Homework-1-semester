@@ -9,3 +9,4 @@ set(SOURCE_LIB
 add_library(library ${SOURCE_LIB})
 
 add_executable(task_4 homework1/task_4.c)
+target_link_libraries(task_4 PRIVATE math.h)
