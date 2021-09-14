@@ -5,7 +5,7 @@
 
 void compositeNumbersSelection(bool* numbersAreComposite, int maxNumber, bool* thereArePrimes)
 {
-    for (int i = 2; i <= sqrt(maxNumber); i++) {
+    for (int i = 2; i <= (int)sqrt((double)maxNumber); i++) {
         *thereArePrimes = true;
         int j = 2;
         while (i * j <= maxNumber) {
