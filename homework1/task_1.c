@@ -21,7 +21,7 @@ void divisionWithRemainder(int a, int b)
     printf("%d %c %d %c %d %c %d %c", a, '/', b, '=', quotient, '(', remainder, ')');
 }
 
-int main(int argc, char *argv[])
+int main()
 {
     int numberA = 0;
     int numberB = 0;
