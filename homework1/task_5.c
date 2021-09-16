@@ -2,16 +2,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void spiralFilling(int** array, bool** wasChanged, int n)
+void spiralFilling(int **array, bool **wasChanged, int arraySideSize)
 {
     int direction = 0;
-    int xPosition = n / 2;
-    int yPosition = n / 2;
+    int xPosition = arraySideSize / 2;
+    int yPosition = arraySideSize / 2;
     int currentElement = 1;
-    int dx[4] = { 1, 0, -1, 0 };
-    int dy[4] = { 0, 1, 0, -1 };
+    int dx[4] = {1, 0, -1, 0};
+    int dy[4] = {0, 1, 0, -1};
 
-    while (currentElement <= n * n) {
+    while (currentElement <= arraySideSize * arraySideSize) {
         array[yPosition][xPosition] = currentElement++;
         wasChanged[yPosition][xPosition] = true;
         yPosition += dy[direction % 4];
@@ -29,14 +29,14 @@ int main()
     printf("%s", "Please, input the number n:\n");
     scanf("%d", &n);
 
-    int** array;
-    array = (int**)calloc(n, sizeof(int*));
-    bool** wasChanged;
-    wasChanged = (bool**)calloc(n, sizeof(bool*));
+    int **array;
+    array = (int **) calloc(n, sizeof(int *));
+    bool **wasChanged;
+    wasChanged = (bool **) calloc(n, sizeof(bool *));
 
     for (int i = 0; i < n; i++) {
-        array[i] = (int*)calloc(n, sizeof(int));
-        wasChanged[i] = (bool*)calloc(n, sizeof(bool));
+        array[i] = (int *) calloc(n, sizeof(int));
+        wasChanged[i] = (bool *) calloc(n, sizeof(bool));
     }
 
     spiralFilling(array, wasChanged, n);
@@ -47,6 +47,7 @@ int main()
             printf("%d %c", array[i][j], ' ');
         printf("%c", '\n');
     }
+
 
     for (int i = 0; i < n; i++) {
         free(array[i]);
