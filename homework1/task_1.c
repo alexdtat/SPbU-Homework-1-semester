@@ -1,36 +1,43 @@
 #include <math.h>
 #include <stdio.h>
+#include <stdbool.h>
 
-void divisionWithRemainder(int a, int b)
+ bool divisionWithRemainder(int dividend, int divisor, int* quotient, int* remainder)
 {
-    int quotient = 0;
-    int remainder = 0;
-    int temporaryA = abs(a);
-    int temporaryB = abs(b);
+    int temporaryDividend = abs(dividend);
+    int temporaryDivisor = abs(divisor);
 
-    while (temporaryA >= temporaryB) {
-        temporaryA -= temporaryB;
-        ++quotient;
+    if (divisor == 0)
+        return 0;
+
+    while (temporaryDividend >= temporaryDivisor) {
+        temporaryDividend -= temporaryDivisor;
+        ++(*quotient);
     }
-    if (a < 0)
-        quotient = -quotient - 1;
-    if (b < 0)
-        quotient = -quotient;
-    remainder = a - quotient * b;
+    if (dividend < 0)
+        *quotient = -(*quotient) - 1;
+    if (divisor < 0)
+        *quotient = -(*quotient);
+    *remainder = dividend - (*quotient) * divisor;
 
-    printf("%d %c %d %c %d %c %d %c", a, '/', b, '=', quotient, '(', remainder, ')');
+    return 1;
 }
 
 int main()
 {
     int numberA = 0;
     int numberB = 0;
+    int quotient = 0;
+    int remainder = 0;
 
     printf("%s", "Please, enter the number a:\n");
     scanf("%d", &numberA);
     printf("%s", "Please, enter the number b:\n");
     scanf("%d", &numberB);
 
-    divisionWithRemainder(numberA, numberB);
+    if (divisionWithRemainder(numberA, numberB, &quotient, &remainder))
+        printf("%d %c %d %c %d %c %d %c", numberA, '/', numberB, '=', quotient, '(', remainder, ')');
+    else
+        printf("%s", "Division by zero is undefined!");
     return 0;
 }
