@@ -1,8 +1,8 @@
 #include <math.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 
- bool divisionWithRemainder(int dividend, int divisor, int* quotient, int* remainder)
+bool divisionWithRemainder(int dividend, int divisor, int *quotient, int *remainder)
 {
     int temporaryDividend = abs(dividend);
     int temporaryDivisor = abs(divisor);
