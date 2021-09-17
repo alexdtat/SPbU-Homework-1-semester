@@ -8,7 +8,7 @@ bool divisionWithRemainder(int dividend, int divisor, int* quotient, int* remain
     int temporaryDivisor = abs(divisor);
 
     if (divisor == 0)
-        return 0;
+        return false;
 
     while (temporaryDividend >= temporaryDivisor) {
         temporaryDividend -= temporaryDivisor;
@@ -20,7 +20,7 @@ bool divisionWithRemainder(int dividend, int divisor, int* quotient, int* remain
         *quotient = -(*quotient);
     *remainder = dividend - (*quotient) * divisor;
 
-    return 1;
+    return true;
 }
 
 int main()
