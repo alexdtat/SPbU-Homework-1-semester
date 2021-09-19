@@ -1,17 +1,13 @@
-#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 void compositeNumbersSelection(bool* numbersAreComposite, int maxNumber, bool* thereArePrimes)
 {
-    for (int i = 2; i <= (int)sqrt((double)maxNumber); i++) {
+    for (long i = 2; i * i <= maxNumber; i++) {
         *thereArePrimes = true;
-        int j = 2;
-        while (i * j <= maxNumber) {
+        for (long j = 2; i * j <= maxNumber; j++)
             numbersAreComposite[i * j] = true;
-            j++;
-        }
     }
 }
 
