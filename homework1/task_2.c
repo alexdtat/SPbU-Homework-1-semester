@@ -19,7 +19,6 @@ int findMaxPair(int* array, int size, bool* thereExistsMaxPair)
     return *maxPair;
 }
 
-
 int main()
 {
     int size = 0;
