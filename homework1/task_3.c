@@ -1,26 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void swapElementsOfArray(int* array, int firstElementPosition, int secondElementPosition)
+{
+    int buffer = array[firstElementPosition];
+    array[firstElementPosition] = array[secondElementPosition];
+    array[secondElementPosition] = buffer;
+}
+
 void swapSectionsOfArray(int* array, int size, int sectionSize)
 {
     int sectionBegin = 0;
-    int buffer = 0;
 
     while (sectionBegin + 2 * sectionSize < size) {
-        for (int curPos = sectionBegin; curPos < sectionBegin + sectionSize; curPos++) {
-            buffer = array[curPos];
-            array[curPos] = array[sectionSize + curPos];
-            array[sectionSize + curPos] = buffer;
-        }
+        for (int currentPosition = sectionBegin; currentPosition < sectionBegin + sectionSize; currentPosition++)
+            swapElementsOfArray(array, currentPosition, sectionSize + currentPosition);
         sectionBegin += sectionSize;
     }
 
-    for (int curPos = sectionBegin + sectionSize; curPos < size; curPos++) {
-        for (int shiftedPos = sectionBegin + sectionSize; shiftedPos > sectionBegin; shiftedPos--) {
-            buffer = array[shiftedPos];
-            array[shiftedPos] = array[shiftedPos - 1];
-            array[shiftedPos - 1] = buffer;
-        }
+    for (int currentPosition = sectionBegin + sectionSize; currentPosition < size; currentPosition++) {
+        for (int shiftedPosition = sectionBegin + sectionSize; shiftedPosition > sectionBegin; shiftedPosition--)
+            swapElementsOfArray(array, shiftedPosition, shiftedPosition - 1);
     }
 }
 
