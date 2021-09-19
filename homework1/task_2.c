@@ -4,20 +4,21 @@
 
 int findMaxPair(int* array, int size, bool* thereExistsMaxPair)
 {
-    int maxPair = array[0];
+    int* maxPair = &array[0];
     for (int i = 0; i < size - 1; i++) {
-        if (array[i] > maxPair || thereExistsMaxPair) {
+        if (array[i] > *maxPair || thereExistsMaxPair) {
             for (int j = i + 1; j < size; j++) {
                 if (array[j] == array[i]) {
-                    maxPair = array[i];
-                    *thereExistsMaxPair = (bool*)true;
+                    *maxPair = array[i];
+                    *thereExistsMaxPair = true;
                 }
             }
         }
     }
 
-    return maxPair;
+    return *maxPair;
 }
+
 
 int main()
 {
