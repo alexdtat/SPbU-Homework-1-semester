@@ -48,7 +48,6 @@ int main()
         printf("%c", '\n');
     }
 
-
     for (int i = 0; i < n; i++) {
         free(array[i]);
         free(wasChanged[i]);
