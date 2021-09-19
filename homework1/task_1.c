@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-bool divisionWithRemainder(int dividend, int divisor, int* quotient)
+bool divisionWithIncompleteQuotient(int dividend, int divisor, int* quotient)
 {
     int temporaryDividend = abs(dividend);
     int temporaryDivisor = abs(divisor);
@@ -33,7 +33,7 @@ int main()
     printf("%s", "Please, enter the number b:\n");
     scanf("%d", &numberB);
 
-    if (divisionWithRemainder(numberA, numberB, &quotient))
+    if (divisionWithIncompleteQuotient(numberA, numberB, &quotient))
         printf("%d %c %d %c %d", numberA, '/', numberB, '=', quotient);
     else
         printf("%s", "Division by zero is undefined!");
