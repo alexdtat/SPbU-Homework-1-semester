@@ -8,8 +8,8 @@ void spiralFilling(int** array, bool** wasChanged, int arraySideSize)
     int xPosition = arraySideSize / 2;
     int yPosition = arraySideSize / 2;
     int currentElement = 1;
-    int dx[4] = {1, 0, -1, 0};
-    int dy[4] = {0, 1, 0, -1};
+    int dx[4] = { 1, 0, -1, 0 };
+    int dy[4] = { 0, 1, 0, -1 };
 
     while (currentElement <= arraySideSize * arraySideSize) {
         array[yPosition][xPosition] = currentElement++;
@@ -43,9 +43,8 @@ int main()
 
     printf("%s", "Array:\n");
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
+        for (int j = 0; j < n; j++)
             printf("%d %c", array[i][j], ' ');
-        }
         printf("%c", '\n');
     }
 
