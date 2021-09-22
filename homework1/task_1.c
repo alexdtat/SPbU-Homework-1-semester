@@ -8,7 +8,7 @@ bool divisionWithIncompleteQuotient(int dividend, int divisor, int* quotient)
     int temporaryDivisor = abs(divisor);
 
     if (divisor == 0)
-        return 0;
+        return false;
 
     while (temporaryDividend >= temporaryDivisor) {
         temporaryDividend -= temporaryDivisor;
@@ -19,7 +19,7 @@ bool divisionWithIncompleteQuotient(int dividend, int divisor, int* quotient)
     if (divisor < 0)
         *quotient = -(*quotient);
 
-    return 1;
+    return true;
 }
 
 int main()
