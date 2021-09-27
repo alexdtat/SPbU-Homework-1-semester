@@ -37,7 +37,7 @@ void writeLinkedMapIntoFile(LinkedMap* map, const char* filePath)
     resultsFile = fopen(filePath, "w");
 
     if (resultsFile) {
-        for (LinkedMapElement* mapElement = map->head; !mapElement; mapElement = mapElement->nextElement) {
+        for (LinkedMapElement* mapElement = map->head; mapElement; mapElement = mapElement->nextElement) {
             fprintf(resultsFile, "%s,%d\n", mapElement->key, mapElement->value);
         }
         fclose(resultsFile);
