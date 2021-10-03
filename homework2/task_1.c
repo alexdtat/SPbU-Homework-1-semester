@@ -3,30 +3,22 @@
 #include <locale.h>
 #include <stddef.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
 void readFileIntoLinkedMap(LinkedMap* map, const char* filePath)
 {
     FILE* sourcesFile = NULL;
-    char* bufferString = NULL;
+    char bufferString[128];
     errno = 0;
 
-    bufferString = calloc(map->keySize, sizeof(char));
     sourcesFile = fopen(filePath, "r");
 
     if (sourcesFile) {
-        while (fscanf(sourcesFile, "%s ", bufferString) != EOF) {
-            if (!hasKey(map, bufferString))
-                appendElement(map, createNewElement(bufferString, map->keySize));
+        while (fscanf(sourcesFile, "%s ", bufferString) != EOF)
             put(map, bufferString, get(map, bufferString) + 1);
-            for (int i = 0; bufferString[i] != '\0'; i++)
-                bufferString[i] = '\0';
-        }
         fclose(sourcesFile);
     } else
         printf("FILE OPENING ERROR! The error's code (errno):\t%d\n", errno);
-
-    free(bufferString);
 }
 
 void writeLinkedMapIntoFile(LinkedMap* map, const char* filePath)
@@ -37,33 +29,31 @@ void writeLinkedMapIntoFile(LinkedMap* map, const char* filePath)
     resultsFile = fopen(filePath, "w");
 
     if (resultsFile) {
-        for (LinkedMapElement* mapElement = map->head; mapElement; mapElement = mapElement->nextElement) {
-            fprintf(resultsFile, "%s,%d\n", mapElement->key, mapElement->value);
+        for (LinkedMapElement* mapElement = getHead(map); mapElement; mapElement = getNextElement(mapElement)) {
+            fprintf(resultsFile, "%s,%d\n", getKey(mapElement), getValue(mapElement));
         }
         fclose(resultsFile);
     } else
         printf("FILE OPENING ERROR! The error's code (errno):\t%d\n", errno);
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    setlocale(LC_ALL, "Russian");
-    char* sourcesFilePath = calloc(255, sizeof(char));
-    char* resultsFilePath = calloc(255, sizeof(char));
+    if (argc == 3) {
+        setlocale(LC_ALL, "Russian");
+        char sourcesFilePath[256];
+        char resultsFilePath[256];
 
-    printf("Please, input the path to the file containing the analyzed text (ANSI or windows-1251 encoding):\n");
-    scanf("%s", sourcesFilePath);
-    printf("Please, input the path to the file for recording analysis results (ANSI or windows-1251 encoding):\n");
-    scanf("%s", resultsFilePath);
+        strcpy(sourcesFilePath, argv[1]);
+        strcpy(resultsFilePath, argv[2]);
 
-    LinkedMap* myMap = createNewLinkedMap();
-    resizeLinkedMapElementKey(myMap, 127);
+        LinkedMap* myMap = createNewLinkedMap();
 
-    readFileIntoLinkedMap(myMap, sourcesFilePath);
-    writeLinkedMapIntoFile(myMap, resultsFilePath);
+        readFileIntoLinkedMap(myMap, sourcesFilePath);
+        writeLinkedMapIntoFile(myMap, resultsFilePath);
 
-    deleteLinkedMap(myMap);
-    free(sourcesFilePath);
-    free(resultsFilePath);
+        deleteLinkedMap(myMap);
+    } else
+        printf("CONSOLE INPUT FORMAT VIOLATION!");
     return 0;
 }

@@ -2,30 +2,31 @@
 #define HOMEWORK2_LINKEDMAP_H
 
 #include <stdbool.h>
+#include <stddef.h>
 
-typedef struct LinkedMapElement {
-    char* key;
-    int value;
-    struct LinkedMapElement* nextElement;
-} LinkedMapElement;
+#define ELEMENT_DOES_NOT_EXIST -1
+#define NON_EXISTENT_ELEMENT NULL
 
-typedef struct LinkedMap {
-    int keySize;
-    LinkedMapElement* head;
-    LinkedMapElement* tail;
-} LinkedMap;
+typedef struct LinkedMapElement LinkedMapElement;
+
+typedef struct LinkedMap LinkedMap;
 
 LinkedMap* createNewLinkedMap();
-LinkedMapElement* createNewElement(const char* data, int keySize);
+LinkedMapElement* createNewElement(const char* data);
+LinkedMapElement* deleteElementAndGetNext(LinkedMapElement* elementForDeletion);
+LinkedMapElement* getNextElement(LinkedMapElement* element);
+LinkedMapElement* getHead(LinkedMap* map);
+LinkedMapElement* findElementByKey(LinkedMap* map, const char* userKey);
 
 void appendElement(LinkedMap* map, LinkedMapElement* element);
-void resizeLinkedMapElementKey(LinkedMap* map, int newSize);
 void put(LinkedMap* map, const char* userKey, int userValue);
 void printLinkedMap(LinkedMap* map);
-LinkedMapElement* deleteElementAndGetNext(LinkedMapElement* elementForDeletion);
 void deleteLinkedMap(LinkedMap* map);
 
 int get(LinkedMap* map, const char* userKey);
+int getValue(LinkedMapElement* element);
+
+char* getKey(LinkedMapElement* element);
 
 bool hasKey(LinkedMap* map, const char* userKey);
 
