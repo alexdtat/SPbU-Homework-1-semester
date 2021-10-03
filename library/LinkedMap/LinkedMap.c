@@ -56,7 +56,7 @@ int getValue(LinkedMapElement* element)
 
 LinkedMapElement* findElementByKey(LinkedMap* map, const char* userKey)
 {
-    for (LinkedMapElement* mapElement = map->head; mapElement != NULL; mapElement = mapElement->nextElement) {
+    for (LinkedMapElement* mapElement = map->head; mapElement; mapElement = mapElement->nextElement) {
         if (strcmp(mapElement->key, userKey) == 0)
             return mapElement;
     }
@@ -105,9 +105,21 @@ void printLinkedMap(LinkedMap* map)
         printf("%s\t%d\n", currentElement->key, currentElement->value);
 }
 
-LinkedMapElement* deleteElementAndGetNext(LinkedMapElement* elementForDeletion)
+LinkedMapElement* deleteElementAndGetNext(LinkedMap* map, LinkedMapElement* elementForDeletion)
 {
     LinkedMapElement* nextElement = elementForDeletion->nextElement;
+    LinkedMapElement* previousElement = NULL;
+
+    for (LinkedMapElement* currentElement = map->head; currentElement != elementForDeletion; elementForDeletion = elementForDeletion->nextElement) {
+        previousElement = currentElement;
+    }
+
+    if (previousElement) {
+        previousElement->nextElement = nextElement;
+        if (!nextElement)
+            map->tail = previousElement;
+    } else if (nextElement)
+        map->head = nextElement;
 
     free(elementForDeletion->key);
     free(elementForDeletion);
@@ -117,7 +129,6 @@ LinkedMapElement* deleteElementAndGetNext(LinkedMapElement* elementForDeletion)
 
 void deleteLinkedMap(LinkedMap* map)
 {
-    for (LinkedMapElement* mapElement = map->head; mapElement; mapElement = deleteElementAndGetNext(mapElement)) {
-    }
+    for (LinkedMapElement* mapElement = map->head; mapElement; mapElement = deleteElementAndGetNext(map, mapElement)) { }
     free(map);
 }

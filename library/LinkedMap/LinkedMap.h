@@ -13,7 +13,7 @@ typedef struct LinkedMap LinkedMap;
 
 LinkedMap* createNewLinkedMap();
 LinkedMapElement* createNewElement(const char* data);
-LinkedMapElement* deleteElementAndGetNext(LinkedMapElement* elementForDeletion);
+LinkedMapElement* deleteElementAndGetNext(LinkedMap* map, LinkedMapElement* elementForDeletion);
 LinkedMapElement* getNextElement(LinkedMapElement* element);
 LinkedMapElement* getHead(LinkedMap* map);
 LinkedMapElement* findElementByKey(LinkedMap* map, const char* userKey);
