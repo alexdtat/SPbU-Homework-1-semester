@@ -1,4 +1,5 @@
 #include "../library/DoublyLinkedList/DoublyLinkedList.h"
+#include <errno.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
