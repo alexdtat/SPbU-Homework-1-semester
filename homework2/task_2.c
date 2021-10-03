@@ -125,14 +125,20 @@ void readFileIntoDoublyLinkedListAndWriteIntoOther(const char* sourcesFilePath, 
                 fscanf(sourcesFile, "%s %s %s\n", currentCommand, firstArgument, secondArgument);
                 if (strcmp(currentCommand, "INSERT") == 0 && !insertFragment(sequence, firstArgument, secondArgument)) {
                     printf("INSERTION ERROR!\n");
+                    fclose(resultsFile);
+                    fclose(sourcesFile);
                     return;
                 }
                 if (strcmp(currentCommand, "REPLACE") == 0 && !replaceFragment(sequence, firstArgument, secondArgument)) {
                     printf("REPLACEMENT ERROR!\n");
+                    fclose(resultsFile);
+                    fclose(sourcesFile);
                     return;
                 }
                 if (strcmp(currentCommand, "DELETE") == 0 && !deleteFragment(sequence, firstArgument, secondArgument)) {
                     printf("DELETION ERROR!\n");
+                    fclose(resultsFile);
+                    fclose(sourcesFile);
                     return;
                 }
                 for (DoublyLinkedListElement* currentElement = getHead(sequence); currentElement; currentElement = getNextElement(currentElement)) {
