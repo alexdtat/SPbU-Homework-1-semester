@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#define SEQUENCE_DOES_NOT_OCCUR NULL
+
 DoublyLinkedListElement* findFirstOccurrenceSince(const char* searchedSequence, DoublyLinkedListElement* start)
 {
     DoublyLinkedListElement* elementOfSequence = NULL;
@@ -24,7 +26,7 @@ DoublyLinkedListElement* findFirstOccurrenceSince(const char* searchedSequence, 
         }
     }
 
-    return NULL;
+    return SEQUENCE_DOES_NOT_OCCUR;
 }
 
 DoublyLinkedListElement* goToEndOfFirstOccurrenceSince(const char* sequence, DoublyLinkedListElement* start)
@@ -32,6 +34,8 @@ DoublyLinkedListElement* goToEndOfFirstOccurrenceSince(const char* sequence, Dou
     DoublyLinkedListElement* currentPosition = NULL;
 
     currentPosition = findFirstOccurrenceSince(sequence, start);
+    if (!currentPosition)
+        return SEQUENCE_DOES_NOT_OCCUR;
     for (int i = 0; i < strlen(sequence) - 1; i++)
         currentPosition = getNextElement(currentPosition);
 
@@ -53,29 +57,47 @@ void deleteFragmentInRange(DoublyLinkedList* list, DoublyLinkedListElement* star
     for (DoublyLinkedListElement* currentPosition = startingElement; currentPosition != elementAfter; currentPosition = deleteElementAndGetNext(list, currentPosition)) { }
 }
 
-void insertFragment(DoublyLinkedList* list, const char* start, const char* fragment)
+bool insertFragment(DoublyLinkedList* list, const char* start, const char* fragment)
 {
     DoublyLinkedListElement* currentPosition = goToEndOfFirstOccurrenceSince(start, getHead(list));
+    if (!currentPosition)
+        return false;
 
     insertFragmentAfterElement(list, currentPosition, fragment);
+
+    return true;
 }
 
-void deleteFragment(DoublyLinkedList* list, const char* start, const char* end)
+bool deleteFragment(DoublyLinkedList* list, const char* start, const char* end)
 {
     DoublyLinkedListElement* startingPosition = findFirstOccurrenceSince(start, getHead(list));
-    DoublyLinkedListElement* endingPosition = getNextElement(goToEndOfFirstOccurrenceSince(end, getNextElement(goToEndOfFirstOccurrenceSince(start, getHead(list)))));
+    if (!startingPosition)
+        return false;
+
+    DoublyLinkedListElement* lastElement = goToEndOfFirstOccurrenceSince(end, getNextElement(goToEndOfFirstOccurrenceSince(start, getHead(list))));
+    if (!lastElement)
+        return false;
+    DoublyLinkedListElement* endingPosition = getNextElement(lastElement);
 
     deleteFragmentInRange(list, startingPosition, endingPosition);
+    return true;
 }
 
-void replaceFragment(DoublyLinkedList* list, const char* template, const char* fragment)
+bool replaceFragment(DoublyLinkedList* list, const char* template, const char* fragment)
 {
     DoublyLinkedListElement* startingPosition = findFirstOccurrenceSince(template, getHead(list));
+    if (!startingPosition)
+        return false;
     DoublyLinkedListElement* elementBeforeStart = getPreviousElement(startingPosition);
-    DoublyLinkedListElement* endingPosition = getNextElement(goToEndOfFirstOccurrenceSince(template, getHead(list)));
+    DoublyLinkedListElement* lastElement = goToEndOfFirstOccurrenceSince(template, getHead(list));
+    if (!lastElement)
+        return false;
+    DoublyLinkedListElement* endingPosition = getNextElement(lastElement);
 
     deleteFragmentInRange(list, startingPosition, endingPosition);
     insertFragmentAfterElement(list, elementBeforeStart, fragment);
+
+    return true;
 }
 
 void readFileIntoDoublyLinkedListAndWriteIntoOther(const char* sourcesFilePath, const char* resultsFilePath, DoublyLinkedList* sequence)
@@ -101,12 +123,18 @@ void readFileIntoDoublyLinkedListAndWriteIntoOther(const char* sourcesFilePath, 
             fscanf(sourcesFile, "%d\n", &numberOfLines);
             for (int i = 0; i < numberOfLines; i++) {
                 fscanf(sourcesFile, "%s %s %s\n", currentCommand, firstArgument, secondArgument);
-                if (strcmp(currentCommand, "INSERT") == 0)
-                    insertFragment(sequence, firstArgument, secondArgument);
-                if (strcmp(currentCommand, "REPLACE") == 0)
-                    replaceFragment(sequence, firstArgument, secondArgument);
-                if (strcmp(currentCommand, "DELETE") == 0)
-                    deleteFragment(sequence, firstArgument, secondArgument);
+                if (strcmp(currentCommand, "INSERT") == 0 && !insertFragment(sequence, firstArgument, secondArgument)) {
+                    printf("INSERTION ERROR!\n");
+                    return;
+                }
+                if (strcmp(currentCommand, "REPLACE") == 0 && !replaceFragment(sequence, firstArgument, secondArgument)) {
+                    printf("REPLACEMENT ERROR!\n");
+                    return;
+                }
+                if (strcmp(currentCommand, "DELETE") == 0 && !deleteFragment(sequence, firstArgument, secondArgument)) {
+                    printf("DELETION ERROR!\n");
+                    return;
+                }
                 for (DoublyLinkedListElement* currentElement = getHead(sequence); currentElement; currentElement = getNextElement(currentElement)) {
                     fprintf(resultsFile, "%c", getSymbol(currentElement));
                 }
