@@ -45,7 +45,8 @@ int getValue(LinkedListElement* element)
     return element->value;
 }
 
-void setValue(LinkedListElement* element, int data){
+void setValue(LinkedListElement* element, int data)
+{
     element->value = data;
 }
 
@@ -58,7 +59,8 @@ void appendElement(LinkedList* list, LinkedListElement* element)
     list->tail = element;
 }
 
-void appendNewElement(LinkedList* list, int data){
+void appendNewElement(LinkedList* list, int data)
+{
     LinkedListElement* newElement = createNewElement(data);
     appendElement(list, newElement);
 }
