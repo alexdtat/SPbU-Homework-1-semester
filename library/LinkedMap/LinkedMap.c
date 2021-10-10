@@ -23,14 +23,14 @@ LinkedMap* createNewLinkedMap()
     return newLinkedMap;
 }
 
-LinkedMapElement* createNewElement(const char* data)
+LinkedMapElement* createNewElement(const char* userKey, int userValue)
 {
     LinkedMapElement* newElement = malloc(sizeof(LinkedMapElement));
-    newElement->key = calloc(strlen(data) + 1, sizeof(char));
+    newElement->key = calloc(strlen(userKey) + 1, sizeof(char));
 
-    strcpy(newElement->key, data);
+    strcpy(newElement->key, userKey);
     newElement->nextElement = NULL;
-    newElement->value = 0;
+    newElement->value = userValue;
     return newElement;
 }
 
@@ -75,10 +75,9 @@ void appendElement(LinkedMap* map, LinkedMapElement* element)
 
 void put(LinkedMap* map, const char* userKey, int userValue)
 {
-    if (!hasKey(map, userKey)) {
-        appendElement(map, createNewElement(userKey));
-        map->tail->value = 1;
-    } else
+    if (!hasKey(map, userKey))
+        appendElement(map, createNewElement(userKey, 1));
+    else
         findElementByKey(map, userKey)->value = userValue;
 }
 
@@ -110,16 +109,16 @@ LinkedMapElement* deleteElementAndGetNext(LinkedMap* map, LinkedMapElement* elem
     LinkedMapElement* nextElement = elementForDeletion->nextElement;
     LinkedMapElement* previousElement = NULL;
 
-    for (LinkedMapElement* currentElement = map->head; currentElement != elementForDeletion; elementForDeletion = elementForDeletion->nextElement) {
+    for (LinkedMapElement* currentElement = map->head; currentElement != elementForDeletion; currentElement = currentElement->nextElement)
         previousElement = currentElement;
-    }
 
-    if (previousElement) {
+    if (previousElement)
         previousElement->nextElement = nextElement;
-        if (!nextElement)
-            map->tail = previousElement;
-    } else if (nextElement)
+    else
         map->head = nextElement;
+
+    if (!nextElement)
+        map->tail = previousElement;
 
     free(elementForDeletion->key);
     free(elementForDeletion);

@@ -12,7 +12,7 @@ typedef struct LinkedMapElement LinkedMapElement;
 typedef struct LinkedMap LinkedMap;
 
 LinkedMap* createNewLinkedMap();
-LinkedMapElement* createNewElement(const char* data);
+LinkedMapElement* createNewElement(const char* userKey, int userValue);
 LinkedMapElement* deleteElementAndGetNext(LinkedMap* map, LinkedMapElement* elementForDeletion);
 LinkedMapElement* getNextElement(LinkedMapElement* element);
 LinkedMapElement* getHead(LinkedMap* map);
