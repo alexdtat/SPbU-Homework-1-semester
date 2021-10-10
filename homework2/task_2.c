@@ -32,7 +32,6 @@ bool find(DoublyLinkedListElement* start, const char* sequence, DoublyLinkedList
     return false;
 }
 
-
 void insertFragmentAfterElement(DoublyLinkedList* list, DoublyLinkedListElement* elementBefore, const char* fragment)
 {
     DoublyLinkedListElement* currentPosition = elementBefore;
