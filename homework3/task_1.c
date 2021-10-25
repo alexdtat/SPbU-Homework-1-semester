@@ -36,5 +36,5 @@ int main()
 
     free(firstNumberBinary);
     free(secondNumberBinary);
-    free(additionResultBinary)
+    free(additionResultBinary);
 }
