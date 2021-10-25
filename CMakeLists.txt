@@ -28,7 +28,7 @@ target_link_libraries(hw_2_task_1 LinkedMap)
 add_executable(hw_2_task_2 ../homework2/task_2.c)
 target_link_libraries(hw_2_task_2 DoublyLinkedList)
 
-add_executable(hw_4_task_3 task_3.c)
+add_executable(hw_4_task_3 ../homework4/task_3.c)
 target_link_libraries(hw_4_task_3 binaryIntegers)
 
 
