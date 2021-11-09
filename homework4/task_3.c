@@ -8,20 +8,20 @@ int main()
     int firstNumber = 0;
     int secondNumber = 0;
     int result = 0;
-    _Bool* firstNumberBinary = calloc(size, sizeof(_Bool));
-    _Bool* secondNumberBinary = calloc(size, sizeof(_Bool));
-    _Bool* resultBinary = calloc(size, sizeof(_Bool));
+    bool* firstNumberBinary = calloc(size, sizeof(int));
+    bool* secondNumberBinary = calloc(size, sizeof(int));
+    bool* resultBinary = calloc(size, sizeof(int));
 
     printf("Please, enter the first number:\n");
     scanf("%d", &firstNumber);
     printf("Please, enter the second number:\n");
     scanf("%d", &secondNumber);
 
-    getBinaryForm(firstNumber, firstNumberBinary, size);
-    getBinaryForm(secondNumber, secondNumberBinary, size);
+    getBinaryForm(firstNumber, firstNumberBinary);
+    getBinaryForm(secondNumber, secondNumberBinary);
 
-    multiplyBinaryNumbers(firstNumberBinary, secondNumberBinary, resultBinary, size);
-    result = getDecimalForm(resultBinary, size);
+    multiplyBinaryNumbers(firstNumberBinary, secondNumberBinary, resultBinary);
+    result = getDecimalForm(resultBinary);
 
     printf("\n%d * %d = %d", firstNumber, secondNumber, result);
 

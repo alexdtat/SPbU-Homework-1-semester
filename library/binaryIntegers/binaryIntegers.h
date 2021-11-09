@@ -1,9 +1,12 @@
 #ifndef HOMEWORK3_BINARYINTEGERS_H
 #define HOMEWORK3_BINARYINTEGERS_H
 
-void getBinaryForm(int number, _Bool* numberBinary, int size);
-int getDecimalForm(_Bool* numberBinary, int size);
-void addBinaryNumbers(_Bool* firstNumber, _Bool* secondNumber, _Bool* result, int size);
-void multiplyBinaryNumbers(_Bool* firstNumber, _Bool* secondNumber, _Bool* resultNumber, int size);
+#include <stdbool.h>
+
+void getBinaryForm(int number, bool* numberBinary);
+int getDecimalForm(bool* numberBinary);
+void addBinaryNumbers(bool* firstNumber, bool* secondNumber, bool* result);
+void multiplyBinaryNumbers(bool* firstNumber, bool* secondNumber, bool* resultNumber);
+
 
 #endif // HOMEWORK3_BINARYINTEGERS_H
