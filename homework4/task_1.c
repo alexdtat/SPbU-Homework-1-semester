@@ -7,17 +7,17 @@ int main()
     int size = 16;
     int firstNumber = 0;
     int secondNumber = 0;
-    _Bool* firstNumberBinary = calloc(size, sizeof(_Bool));
-    _Bool* secondNumberBinary = calloc(size, sizeof(_Bool));
-    _Bool* additionResultBinary = calloc(size, sizeof(_Bool));
+    bool* firstNumberBinary = calloc(size, sizeof(int));
+    bool* secondNumberBinary = calloc(size, sizeof(int));
+    bool* additionResultBinary = calloc(size, sizeof(int));
 
     printf("Please, input the first number:\n");
     scanf("%i", &firstNumber);
     printf("Please, input the second number:\n");
     scanf("%i", &secondNumber);
 
-    getBinaryForm(firstNumber, firstNumberBinary, size);
-    getBinaryForm(secondNumber, secondNumberBinary, size);
+    getBinaryForm(firstNumber, firstNumberBinary);
+    getBinaryForm(secondNumber, secondNumberBinary);
 
     printf("\nThe first binary number:\n");
     for (int i = 0; i < size; i++)
@@ -26,13 +26,13 @@ int main()
     for (int i = 0; i < size; i++)
         printf("%d", secondNumberBinary[i]);
 
-    addBinaryNumbers(firstNumberBinary, secondNumberBinary, additionResultBinary, size);
+    addBinaryNumbers(firstNumberBinary, secondNumberBinary, additionResultBinary);
 
     printf("\nBinary ddition result:\n");
     for (int i = 0; i < size; i++)
         printf("%d", additionResultBinary[i]);
 
-    printf("\nDecimal addition result:\n%d", getDecimalForm(additionResultBinary, size));
+    printf("\nDecimal addition result:\n%d", getDecimalForm(additionResultBinary));
 
     free(firstNumberBinary);
     free(secondNumberBinary);
