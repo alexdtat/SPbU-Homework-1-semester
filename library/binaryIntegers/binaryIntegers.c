@@ -80,7 +80,7 @@ void leftBinaryShift(bool* number)
 {
     for (int i = 1; i < SIZE - 1; i++)
         number[i] = number[i + 1];
-    number[SIZE - 1] = 0;
+    number[SIZE - 1] = false;
 }
 
 void multiplyBinaryNumbers(bool* firstNumber, bool* secondNumber, bool* resultNumber)
