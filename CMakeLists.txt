@@ -33,3 +33,5 @@ target_link_libraries(hw_4_task_1 binaryIntegers)
 
 add_executable(hw_4_task_3 ../homework4/task_3.c)
 target_link_libraries(hw_4_task_3 binaryIntegers)
+
+add_executable(test_2_task_1 test2/task_1.c)
