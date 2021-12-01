@@ -101,10 +101,14 @@ int processData(const char* logsFilePath, const char* resultsFilePath, const cha
 
 int main(int argc, char* argv[])
 {
+    int result = 0;
     if (argc != 3)
         printf("Incorrect number of strings! There should be 3 strings.\n");
-    else
-        printf("Errno is:\t%d", processData(argv[0], argv[1], argv[2]));
+    else {
+        result = processData(argv[0], argv[1], argv[2]);
+        if (!result)
+            printf("Errno is:\t%d", result);
+    }
 
     return 0;
 }
