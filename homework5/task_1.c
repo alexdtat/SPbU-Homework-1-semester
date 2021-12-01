@@ -104,7 +104,7 @@ int main(int argc, char* argv[])
     if (argc != 3)
         printf("Incorrect number of strings! There should be 3 strings.\n");
     else
-        printf("Errno number is:\t%d", processData(argv[0], argv[1], argv[2]));
+        printf("Errno is:\t%d", processData(argv[0], argv[1], argv[2]));
 
     return 0;
 }
