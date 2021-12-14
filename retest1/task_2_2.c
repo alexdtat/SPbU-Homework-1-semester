@@ -6,7 +6,7 @@
 #define RANDOM_MODE 1
 #define CONSOLE_MODE 2
 
-void evenInsertionSort(int size, int *array)
+void evenInsertionSort(int size, int* array)
 {
     int newElement = 0;
     int position = 0;
@@ -30,7 +30,7 @@ int main()
     int size = 0;
     printf("Please, input array's size:\n");
     scanf("%d", &size);
-    int *array = calloc(size, sizeof(int));
+    int* array = calloc(size, sizeof(int));
     printf("Please, select input mode (1 = random from 11 to 42, 2 = console):\n");
     scanf("%d", &mode);
 
