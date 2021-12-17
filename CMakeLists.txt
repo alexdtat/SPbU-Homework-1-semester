@@ -36,7 +36,6 @@ add_executable(hw_4_task_3 ../homework4/task_3.c)
 target_link_libraries(hw_4_task_3 binaryIntegers)
 
 add_executable(retest_1_task_1_1 retest1/task_1_1.c)
-target_link_libraries(task_1_1 PRIVATE ComplexNumber)
-target_link_libraries(task_1_1 PRIVATE m)
+target_link_libraries(retest_1_task_1_1 PRIVATE ComplexNumber m)
 
 add_executable(test_2_task_1 test2/task_1.c)
