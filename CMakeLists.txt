@@ -11,6 +11,7 @@ add_library(DoublyLinkedList STATIC ../library/DoublyLinkedList/DoublyLinkedList
 add_library(LinkedList STATIC ../library/LinkedList/LinkedList.c)
 add_library(LinkedMap STATIC ../library/LinkedMap/LinkedMap.c)
 add_library(binaryIntegers STATIC ../library/binaryIntegers/binaryIntegers.c)
+add_library(ComplexNumber STATIC ../library/ComplexNumber/ComplexNumber.c)
 
 add_executable(test_1_task_2 test1/task_2.c)
 target_link_libraries(test_1_task_2 LinkedList)
@@ -36,4 +37,6 @@ target_link_libraries(hw_4_task_3 binaryIntegers)
 
 add_executable(test_2_task_1 test2/task_1.c)
 
+add_executable(retest_1_task_1_1 retest1/task_1_1.c)
+target_link_libraries(retest_1_task_1_1 PRIVATE ComplexNumber m)
 add_executable(retest_1_task_2_2 retest1/task_2_2.c)
