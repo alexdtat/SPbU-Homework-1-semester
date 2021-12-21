@@ -39,4 +39,4 @@ target_link_libraries(hw_4_task_3 binaryIntegers)
 add_executable(test_2_task_1 test2/task_1.c)
 
 add_executable(final_task_1 ../final/task_1.c)
-target_link_libraries(final_task_1 TreeMap values)
+target_link_libraries(final_task_1 PRIVATE TreeMap values m)
